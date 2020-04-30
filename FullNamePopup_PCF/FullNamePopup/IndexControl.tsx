@@ -8,12 +8,12 @@ export interface IName {
     lastName: string;
 }
 
-export interface IIndexControlProps extends IName{
+export interface IIndexControlProps extends IName {
     fullName: string;
     firstNameLabel: string;
     middleNameLabel: string;
     lastNameLabel: string;
-    onNameChanged: (name:IName) => void;    
+    onNameChanged: (name: IName) => void;
 }
 
 interface IIndexControlState extends IName {
@@ -22,7 +22,7 @@ interface IIndexControlState extends IName {
 
 export default class IndexControl extends React.Component<IIndexControlProps, IIndexControlState>{
 
-    constructor(props: IIndexControlProps){
+    constructor(props: IIndexControlProps) {
         super(props);
 
         this.state = {
@@ -52,14 +52,14 @@ export default class IndexControl extends React.Component<IIndexControlProps, II
         const name: IName = {
             firstName: this.state.firstName,
             middleName: this.state.middleName,
-            lastName: this.state.lastName    
+            lastName: this.state.lastName
         };
 
         this.props.onNameChanged(name);
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div ref={this._menuButtonElement}>
                 <TextField
                     value={this.props.fullName}
@@ -70,14 +70,14 @@ export default class IndexControl extends React.Component<IIndexControlProps, II
                     <Callout
                         target={this._menuButtonElement.current}
                         onDismiss={this.hidePopup}
-                    >   
+                    >
                         <Stack horizontal>
-                            <Stack tokens={{childrenGap: 14, padding:10}}>
+                            <Stack tokens={{ childrenGap: 14, padding: 10 }}>
                                 <Label>{this.props.firstNameLabel}</Label>
                                 <Label>{this.props.middleNameLabel}</Label>
                                 <Label>{this.props.lastNameLabel}</Label>
                             </Stack>
-                            <Stack tokens={{childrenGap: 10, padding: 10}}>
+                            <Stack tokens={{ childrenGap: 10, padding: 10 }}>
                                 <TextField
                                     value={this.state.firstName}
                                     placeholder={"---"}
@@ -105,12 +105,13 @@ export default class IndexControl extends React.Component<IIndexControlProps, II
                                         }, this.onNameChanged)
                                     }}
                                 />
-                            </Stack>>
+                                <PrimaryButton
+                                    text={"Done"}
+                                    onClick={this.hidePopup}
+                                />
+                            </Stack>
                         </Stack>
-                        <PrimaryButton
-                            text={"Done"}
-                            onClick={this.hidePopup}
-                        />
+
                     </Callout>
                 )}
             </div>
